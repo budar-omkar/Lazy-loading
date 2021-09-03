@@ -1,46 +1,5 @@
 
-const URL = "https://avatars.dicebear.com/api/male/john.svg?background=%230000ff"
-document.addEventListener("DOMContentLoaded", () => {
-  let options = {
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.5
-  };
-  const observer = new IntersectionObserver(handleIntersect, options);
-  observer.observe(document.querySelector("footer"));
-  getData();
-});
 
-function handleIntersect(entries) {
-  if (entries[0].isIntersecting) {
-    console.warn("Intersecting Viewort");
-    getData();
-  }
-}
-
-function getData() {
-  let main = document.querySelector("main");
-  console.log("Fetch some JSON data");
-  fetch(URL)
-    .then(response => response.json())
-    .then(data=>{
-
-      data.item.forEach(item=>{
-        let fig = document.createElement('figure');
-        let fc = document.createElement('figurcaption');
-        let img = document.createElement('img');
-        
-        img.src = item.img;
-        img.alt = item.name;
-        fc.textContent = item.name;
-        fig.appendChild(img);
-        fig.appendChild(fc);
-        main.appendChild(fig);
-      })
-
-
-    })
-}
 
 
 function ResourceItem({ name, length }) {
